@@ -32,7 +32,7 @@ class Game extends Model
             $title = $checkTitle->id;
         } else {
             $titleNew = Title::create([
-            'title_games' => $request->title,
+                'title_games' => $request->title,
             ]);
             $title = $titleNew->id;
         }
@@ -41,7 +41,7 @@ class Game extends Model
             $studio = $checkStudio->id;
         } else {
             $studioNew = Studio::create([
-            'studio_games' => $request->studio,
+                'studio_games' => $request->studio,
             ]);
             $studio = $studioNew->id;
         }
@@ -50,7 +50,7 @@ class Game extends Model
             $genre = $checkGenre->id;
         } else {
              $genreNew = Genre::create([
-            'genre_games' => $request->genre,
+                'genre_games' => $request->genre,
             ]);
             $genre = $genreNew->id;
         }
@@ -63,5 +63,25 @@ class Game extends Model
 
         return $games->id;
     }
+
+    /**
+     * Изменяет игру по id
+     *
+     * @return void
+     */
+    public static function updateGame($request, $id)
+    {
+        $modelGame = Game::findOrFail($id);
+        $modelTitle = Title::findOrFail($modelGame->title_id);
+        $modelStudio = Studio::findOrFail($modelGame->studio_id);
+        $modelGenre = Genre::findOrFail($modelGame->genre_id);
+        $modelTitle->title_games = $request->title;
+        $modelTitle->save();
+        $modelStudio->studio_games = $request->studio;
+        $modelStudio->save();
+        $modelGenre->genre_games = $request->genre;
+        $modelGenre->save();
+    }
+
 
 }

@@ -84,16 +84,7 @@ class GameViewModel extends ViewModel
      */
     public static function update($request, $id)
     {
-        $modelGame = Game::findOrFail($id);
-        $modelTitle = Title::findOrFail($modelGame->title_id);
-        $modelStudio = Studio::findOrFail($modelGame->studio_id);
-        $modelGenre = Genre::findOrFail($modelGame->genre_id);
-        $modelTitle->title_games = $request->title;
-        $modelTitle->save();
-        $modelStudio->studio_games = $request->studio;
-        $modelStudio->save();
-        $modelGenre->genre_games = $request->genre;
-        $modelGenre->save();
+        Game::updateGame($request, $id);
 
         return self::show($id);
     }
