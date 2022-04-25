@@ -54,22 +54,7 @@ class GameViewModel extends ViewModel
      */
     public static function store($request)
     {
-        $title = Title::create([
-            'title_games' => $request->title,
-        ]);
-        $studio = Studio::create([
-            'studio_games' => $request->studio,
-        ]);
-        $genre = Genre::create([
-            'genre_games' => $request->genre,
-        ]);
-        $games = Game::create([
-            'title_id' => $title->id,
-            'studio_id' => $studio->id,
-            'genre_id' => $genre->id,
-        ]);
-
-        return self::show($games->id);
+        return self::show(Game::store($request));
     }
 
     /**
