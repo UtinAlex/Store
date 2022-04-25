@@ -22,7 +22,7 @@ class GameViewModel extends ViewModel
      */
     public static function index(): array
     {
-        $games = Game::all()->toArray();
+        $games = Game::query()->paginate(10);
         $valuesIdGames = [];
         $valuesArrIdGames = [];
         foreach ($games as $arrGames) {
@@ -42,6 +42,7 @@ class GameViewModel extends ViewModel
             
             $valuesIdGames = [];
         }
+        array_push($valuesArrIdGames, $games);
 
         return $valuesArrIdGames;
     }
