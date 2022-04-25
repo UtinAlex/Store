@@ -106,14 +106,7 @@ class GameViewModel extends ViewModel
     public static function destroy($id)
     {
         $modelGame = Game::findOrFail($id);
-        $modelTitle = Title::findOrFail($modelGame->title_id);
-        $modelStudio = Studio::findOrFail($modelGame->studio_id);
-        $modelGenre = Genre::findOrFail($modelGame->genre_id);
         $modelGame->delete();
-        $modelTitle->delete();
-        $modelStudio->delete();
-        $modelGenre->delete();
-        
 
         return response(null, 204);
     }
